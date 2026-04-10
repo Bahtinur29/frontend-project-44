@@ -1,30 +1,21 @@
-import runEngine from '../index.js';
+import runEngine from '../index.js'
 
-const description = 'What is the result of the expression?';
+const description = 'What is the result of the expression?'
 
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const generateRound = () => {
+ const num1 = Math.floor(Math.random() * 20) + 1
+const num2 = Math.floor(Math.random() * 10) + 1
+const operators = ['+', '-', '*']
+const operator = operators[Math.floor(Math.random() * operators.length)]
 
-const calculate = (num1, num2, operator) => {
-  switch (operator) {
-    case '+': return num1 + num2;
-    case '-': return num1 - num2;
-    case '*': return num1 * num2;
-    default: return null;
-  }
-};
+const question = 
 
-const getRoundData = () => {
-  const num1 = getRandomInt(1, 20);
-  const num2 = getRandomInt(1, 20);
-  const operators = ['+', '-', '*'];
-  const operator = operators[getRandomInt(0, operators.length - 1)];
+let result
+if (operator === '+') result = num1 + num2
+if (operator === '-') result = num1 - num2
+if (operator === '*') result = num1 * num2
 
-  const question = `${num1} ${operator} ${num2}`;
-  const correctAnswer = String(calculate(num1, num2, operator));
+return [question, String(result)]
+}
 
-  return [question, correctAnswer];
-};
-
-export default () => {
-  runEngine(description, getRoundData);
-};
+export default () => runEngine(description, generateRound)
