@@ -22,21 +22,23 @@ const runGame = (description, generateRound) => {
   console.log(`Congratulations, ${name}!`)
 }
 
-const description = 'What is the result of the expression?'
+const description = 'What number is missing in the progression?'
 
 const generateRound = () => {
-  const operators = ['+', '-', '*']
-  const num1 = Math.floor(Math.random() * 20) + 1
-  const num2 = Math.floor(Math.random() * 20) + 1
-  const operator = operators[Math.floor(Math.random() * operators.length)]
-  const question = `${num1} ${operator} ${num2}`
+  const start = Math.floor(Math.random() * 10) + 1
+  const step = Math.floor(Math.random() * 5) + 2
+  const length = Math.floor(Math.random() * 5) + 5
+  const hiddenIndex = Math.floor(Math.random() * length)
+  const progression = []
+  for (let i = 0; i < length; i += 1) {
+    progression.push(start + step * i)
+  }
 
-  let result
-  if (operator === '+') result = num1 + num2
-  if (operator === '-') result = num1 - num2
-  if (operator === '*') result = num1 * num2
+  const correctAnswer = String(progression[hiddenIndex])
+  progression[hiddenIndex] = '..'
+  const question = progression.join(' ')
 
-  return [question, String(result)]
+  return [question, correctAnswer]
 }
 
 runGame(description, generateRound)

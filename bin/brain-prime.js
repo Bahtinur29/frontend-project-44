@@ -12,7 +12,7 @@ const runGame = (description, generateRound) => {
     console.log(`Question: ${question}`)
     const userAnswer = readlineSync.question('Your answer: ')
 
-    if (userAnswer !== String(correctAnswer)) {
+    if (userAnswer !== correctAnswer) {
       console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`)
       console.log(`Let's try again, ${name}!`)
       return
@@ -22,21 +22,21 @@ const runGame = (description, generateRound) => {
   console.log(`Congratulations, ${name}!`)
 }
 
-const description = 'What is the result of the expression?'
+const isPrime = (num) => {
+  if (num < 2) return false
+  for (let i = 2; i <= Math.sqrt(num); i += 1) {
+    if (num % i === 0) return false
+  }
+  return true
+}
+
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".'
 
 const generateRound = () => {
-  const operators = ['+', '-', '*']
-  const num1 = Math.floor(Math.random() * 20) + 1
-  const num2 = Math.floor(Math.random() * 20) + 1
-  const operator = operators[Math.floor(Math.random() * operators.length)]
-  const question = `${num1} ${operator} ${num2}`
-
-  let result
-  if (operator === '+') result = num1 + num2
-  if (operator === '-') result = num1 - num2
-  if (operator === '*') result = num1 * num2
-
-  return [question, String(result)]
+  const number = Math.floor(Math.random() * 100) + 1
+  const question = String(number)
+  const correctAnswer = isPrime(number) ? 'yes' : 'no'
+  return [question, correctAnswer]
 }
 
 runGame(description, generateRound)
