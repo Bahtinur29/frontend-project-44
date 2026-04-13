@@ -1,3 +1,7 @@
-import runGame from '../src/games/calc.js'
+#!/usr/bin/env node
+import runGame from '../src/index.js'
+import runCalcGame from '../src/games/calc.js'
 
-runGame()
+runGame(runCalcGame)
+// eslint-disable-next-line no-undef
+export default () => runGame(description, generateRound)
